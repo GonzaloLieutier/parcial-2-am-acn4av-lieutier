@@ -7,4 +7,10 @@
     <color name="imc_neutral">#455A64</color>
     <color name="imc_underweight">#81D4FA</color>
     <color name="imc_overweight">#FB8C00</color>
+
+
+    <color name="splash_background">#E3F2FD</color>
+    <color name="splash_primary">#1976D2</color>
+    <color name="historial_item_bg">#F5F5F5</color>
+    <color name="historial_item_border">#E0E0E0</color>
 </resources>
