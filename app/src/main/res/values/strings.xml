@@ -20,9 +20,9 @@
     <string name="tip_obesidad">Tip: consulta con un profesional y progresa con baja intensidad.</string>
 
 
-    <string name="splash_title">Bienvenido a IMC</string>
-    <string name="splash_subtitle">Tu compañero de salud y bienestar</string>
-    <string name="splash_button">Comenzar</string>
+    <string name="inicio_title">Bienvenido a IMC</string>
+    <string name="inicio_subtitle">Tu compañero de salud y bienestar</string>
+    <string name="inicio_button">Comenzar</string>
 
 
     <string name="historial_title">Historial de Cálculos</string>

@@ -8,7 +8,7 @@
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity"
+        <activity android:name=".InicioActivity"
             android:exported="true">
 
             <intent-filter>
@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"
+            android:exported="false"/>
+
+        <activity android:name=".HistorialActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

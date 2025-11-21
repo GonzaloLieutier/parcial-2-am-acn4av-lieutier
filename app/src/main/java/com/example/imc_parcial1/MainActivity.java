@@ -1,5 +1,7 @@
 package com.example.imc_parcial1;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -9,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etPeso, etAltura;
     private TextView tvResultado, tvImcGigante;
     private LinearLayout resultContainer, dynamicContainer;
-    private Button btnCalcular;
+    private Button btnCalcular, btnVerHistorial;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +35,12 @@ public class MainActivity extends AppCompatActivity {
         resultContainer = findViewById(R.id.resultContainer);
         dynamicContainer = findViewById(R.id.dynamicContainer);
         btnCalcular = findViewById(R.id.btnCalcular);
+        btnVerHistorial = findViewById(R.id.btnVerHistorial);
+
+        sharedPreferences = getSharedPreferences("HistorialIMC", MODE_PRIVATE);
 
         btnCalcular.setOnClickListener(v -> calcularIMC());
+        btnVerHistorial.setOnClickListener(v -> abrirHistorial());
     }
 
     private void calcularIMC() {
@@ -98,10 +107,27 @@ public class MainActivity extends AppCompatActivity {
                 tipView = (TextView) dynamicContainer.getChildAt(0);
             }
             tipView.setText(getTip(categoria));
+
+            guardarEnHistorial(imc, categoria);
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Formato numérico inválido", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void guardarEnHistorial(float imc, String categoria) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date());
+        String key = "calculo_" + System.currentTimeMillis();
+        String value = String.format(Locale.getDefault(), "%.1f", imc) + "|" + categoria + "|" + fecha;
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    private void abrirHistorial() {
+        Intent intent = new Intent(MainActivity.this, HistorialActivity.class);
+        startActivity(intent);
+    }
+
     private String getTip(String categoria) {
         if (categoria == null) return "";
         if (categoria.equals(getString(R.string.cat_bajo_peso)))  return getString(R.string.tip_bajo_peso);
